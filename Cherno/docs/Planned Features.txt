@@ -1,0 +1,26 @@
+================
+Planned Features
+================
+
+Levels:
+-------
+- Loading and saving level files
+- Custom level creator... maybe
+- Formatting
+
+Graphics:
+---------
+- Multiple displays (for GUI components perhaps)
+
+Sound:
+------
+- Loading and playing sound files... obviously
+
+Entities:
+---------
+- Sub-entity types and sorting
+
+Networking:
+-----------
+- TCP and UDP data transfer
+- Which equals multiplayer

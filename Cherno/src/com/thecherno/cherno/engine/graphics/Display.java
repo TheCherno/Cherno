@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import com.thecherno.cherno.engine.input.Keyboard;
+
 public class Display {
 
 	private double scale = 0.0;
@@ -40,5 +42,13 @@ public class Display {
 	public void show() {
 		g.dispose();
 		bs.show();
+	}
+
+	public void enable(byte device) {
+		if (device == 0x0) {
+			window.addKeyListener(new Keyboard());
+		} else if (device == 0x1) {
+			// TODO: Add mouse support!
+		}
 	}
 }

@@ -2,7 +2,7 @@ package com.thecherno.cherno.engine.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+import java.io.FileInputStream;
 import javax.imageio.ImageIO;
 
 public class Texture {

@@ -20,7 +20,9 @@ public class Texture {
 		int width = 0, height = 0;
 		int[] pixels = null;
 		try {
-			BufferedImage image = ImageIO.read(Texture.class.getResource(path));
+			//BufferedImage image = ImageIO.read(Texture.class.getResource(path));
+			//Change this as so - 
+			BufferedImage image = ImageIO.read(new FileInputStream(path));
 			width = image.getWidth();
 			height = image.getHeight();
 			pixels = new int[width * height];

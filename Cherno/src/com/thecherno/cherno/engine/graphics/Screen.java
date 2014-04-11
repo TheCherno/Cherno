@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import com.thecherno.cherno.engine.error.ChernoError;
+import com.thecherno.cherno.engine.interfaces.Renderable;
 
 public class Screen {
 
@@ -63,7 +64,7 @@ public class Screen {
 
 	public void renderTexture(Texture texture, int x, int y) {
 		if (texture == null) {
-			new ChernoError(this, "Texture is null!").show();
+			new ChernoError("Texture is null!", this).show();
 			return;
 		}
 		for (int yy = 0; yy < texture.getHeight(); yy++) {
@@ -79,5 +80,20 @@ public class Screen {
 	public String toString() {
 		// TODO: Add an actual description here.
 		return "Screen class";
+	}
+
+	public void render(int x, int y, Renderable renderable) {
+		if (renderable == null) {
+			new ChernoError("Renderable is null!", this).show();
+			return;
+		}
+		for (int yy = 0; yy < renderable.getHeight(); yy++) {
+			int yp = yy + y;
+			for (int xx = 0; xx < renderable.getWidth(); xx++) {
+				int xp = xx + x;
+				if (xp < 0 || xp >= width || yp < 0 || yp >= height) continue;
+				pixels[xp + yp * width] = renderable.getPixels()[xx + yy * renderable.getWidth()];
+			}
+		}
 	}
 }

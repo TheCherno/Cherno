@@ -4,6 +4,12 @@ import com.thecherno.cherno.engine.graphics.Screen;
 
 public interface Renderable {
 
-	public void render(Screen screen);
+	public int getWidth();
+
+	public int getHeight();
+
+	public int[] getPixels();
+
+	public void render(int x, int y, Screen screen);
 
 }

@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import com.thecherno.cherno.engine.Cherno;
 import com.thecherno.cherno.engine.graphics.Color;
+import com.thecherno.cherno.engine.graphics.Sprite;
 import com.thecherno.cherno.engine.graphics.Texture;
 import com.thecherno.cherno.engine.input.Keyboard;
 import com.thecherno.cherno.engine.input.Mouse;
@@ -13,13 +14,13 @@ public class Main extends Cherno {
 	private int x = 50, y = 50;
 	private int mx, my;
 
-	private Texture texture;
+	private Sprite sprite;
 
 	public Main() {
 	}
 
 	protected void init() {
-		texture = Texture.load("res/image.png");
+		sprite = new Sprite(Texture.load("res/sprite.png"));
 		createDisplay("Cherno 0.1a", 960, 540);
 		setInput(KEYBOARD | MOUSE);
 		start();
@@ -35,9 +36,9 @@ public class Main extends Cherno {
 	}
 
 	protected void render() {
-		clear();
-		renderTexture(texture, x, y);
+		clear(Color.WHITE);
 		fillRect(mx, my, 80, 80, Color.ORANGE);
+		sprite.render(x, y, getScreen());
 		show();
 	}
 

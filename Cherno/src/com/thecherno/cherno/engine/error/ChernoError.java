@@ -2,12 +2,12 @@ package com.thecherno.cherno.engine.error;
 
 public class ChernoError {
 
-	private Object cls;
 	private String message;
+	private Object cls;
 
-	public ChernoError(Object cls, String message) {
-		this.cls = cls;
+	public ChernoError(String message, Object cls) {
 		this.message = message;
+		this.cls = cls;
 	}
 
 	public void show() {

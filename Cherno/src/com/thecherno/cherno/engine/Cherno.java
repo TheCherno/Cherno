@@ -144,6 +144,10 @@ public abstract class Cherno implements Runnable {
 		display.show();
 	}
 
+	protected Screen getScreen() {
+		return screen;
+	}
+
 	/**
 	 * Clears the pixel array (and thus the screen). This method will clear the screen to black; use the
 	 * {@link #clear(Color) clear(Color)} method to specify a custom color to clear to.

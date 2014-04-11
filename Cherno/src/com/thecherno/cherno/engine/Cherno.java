@@ -5,6 +5,8 @@ import com.thecherno.cherno.engine.graphics.Display;
 import com.thecherno.cherno.engine.graphics.Screen;
 import com.thecherno.cherno.engine.graphics.Texture;
 import com.thecherno.cherno.engine.graphics.Window;
+import com.thecherno.cherno.engine.input.Keyboard;
+import com.thecherno.cherno.engine.input.Mouse;
 
 /**
  * {@code Cherno} engine template class. This class should be the superclass of your main game class. All of the methods
@@ -48,9 +50,9 @@ public abstract class Cherno implements Runnable {
 	private long startTimer = 0L;
 
 	// The byte code for the keyboard.
-	protected final byte KEYBOARD = 0x1;
+	protected final byte KEYBOARD = Keyboard.CODE;
 	// The byte code for the mouse.
-	protected final byte MOUSE = 0x2;
+	protected final byte MOUSE = Mouse.CODE;
 
 	/**
 	 * Starts the main game loop on a new thread, called "Cherno".
@@ -88,8 +90,8 @@ public abstract class Cherno implements Runnable {
 	 *            The device(s) code (grab this from the {@link Cherno} or relevant device class.
 	 * 
 	 */
-	protected final void setInput(byte device) {
-		display.enable(device);
+	protected final void setInput(int device) {
+		display.enable((byte) device);
 	}
 
 	/**
@@ -128,7 +130,7 @@ public abstract class Cherno implements Runnable {
 	 * 
 	 * @return The array of pixels that get rendered onto the screen.
 	 */
-	public final int[] getPixels() {
+	protected final int[] getPixels() {
 		return screen.getPixels();
 	}
 

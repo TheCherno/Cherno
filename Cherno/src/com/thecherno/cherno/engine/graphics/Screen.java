@@ -3,6 +3,8 @@ package com.thecherno.cherno.engine.graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
+import com.thecherno.cherno.engine.error.ChernoError;
+
 public class Screen {
 
 	private int width, height;
@@ -60,6 +62,10 @@ public class Screen {
 	}
 
 	public void renderTexture(Texture texture, int x, int y) {
+		if (texture == null) {
+			new ChernoError(this, "Texture is null!").show();
+			return;
+		}
 		for (int yy = 0; yy < texture.getHeight(); yy++) {
 			int yp = yy + y;
 			for (int xx = 0; xx < texture.getWidth(); xx++) {
@@ -70,4 +76,8 @@ public class Screen {
 		}
 	}
 
+	public String toString() {
+		// TODO: Add an actual description here.
+		return "Screen class";
+	}
 }

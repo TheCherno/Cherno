@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import com.thecherno.cherno.engine.input.Keyboard;
+import com.thecherno.cherno.engine.input.Mouse;
 
 public class Display {
 
@@ -45,10 +46,12 @@ public class Display {
 	}
 
 	public void enable(byte device) {
-		if (device == 0x0) {
+		if ((device & 0x1) == 1) {
 			window.addKeyListener(new Keyboard());
-		} else if (device == 0x1) {
-			// TODO: Add mouse support!
+		}
+		if ((device >> 1 & 0x1) == 1) {
+			window.addMouseListener(new Mouse());
+			window.addMouseMotionListener(new Mouse());
 		}
 	}
 }

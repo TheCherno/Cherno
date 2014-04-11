@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Keyboard extends KeyAdapter {
 
+	public static final byte CODE = 0x1;
+
 	private static List<Integer> pressed = new ArrayList<Integer>();
 	private static boolean[] keys = new boolean[65536];
 

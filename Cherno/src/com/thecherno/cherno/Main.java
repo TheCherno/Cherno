@@ -21,7 +21,7 @@ public class Main extends Cherno {
 
 	protected void init() {
 		sprite = new Sprite(Texture.load("res/sprite.png"));
-		createDisplay("Cherno 0.1a", 960, 540);
+		createDisplay("Cherno 0.1a", 960, 540, 3.0);
 		setInput(KEYBOARD | MOUSE);
 		start();
 	}

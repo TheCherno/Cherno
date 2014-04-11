@@ -79,6 +79,13 @@ public abstract class Cherno implements Runnable {
 		screen = new Screen(width, height);
 	}
 
+	protected final void createDisplay(String name, int width, int height, double scale) {
+		startTimer = System.currentTimeMillis();
+		display = new Display(new Window(name, width, height));
+		display.setScale(scale);
+		screen = new Screen((int) (width / scale), (int) (height / scale));
+	}
+
 	/**
 	 * Sets which devices the engine will use for input. Rather than running this method twice, you can specify two (or
 	 * more) devices, separated by a bitwise or ("|").

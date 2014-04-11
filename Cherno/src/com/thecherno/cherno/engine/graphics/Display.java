@@ -9,7 +9,7 @@ import com.thecherno.cherno.engine.input.Mouse;
 
 public class Display {
 
-	private double scale = 0.0;
+	private double scale = 1.0;
 
 	private Window window;
 	private Graphics g;
@@ -37,7 +37,7 @@ public class Display {
 
 	public void drawImage(BufferedImage image) {
 		g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, window.getWidth(), window.getHeight(), null);
+		g.drawImage(image, 0, 0, (int) (window.getWidth() * scale), (int) (window.getHeight() * scale), null);
 	}
 
 	public void show() {

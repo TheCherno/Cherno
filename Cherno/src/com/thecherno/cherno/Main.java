@@ -17,7 +17,7 @@ public class Main extends Cherno {
 	}
 
 	protected void init() {
-		texture = Texture.load("/image.png");
+		texture = Texture.load("res/image.png");
 		createDisplay("Cherno 0.1a", 960, 540);
 		setInput(KEYBOARD);
 		start();
@@ -31,8 +31,7 @@ public class Main extends Cherno {
 	}
 
 	protected void render() {
-		clear(Color.ORANGE);
-		// fillRect(x, y, 50, 50, Color.ORANGE);
+		clear();
 		renderTexture(texture, x, y);
 		show();
 	}

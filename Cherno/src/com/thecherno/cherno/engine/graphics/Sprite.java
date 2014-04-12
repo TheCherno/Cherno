@@ -12,6 +12,10 @@ public class Sprite implements Renderable {
 		height = texture.getHeight();
 		pixels = texture.getPixels();
 	}
+	
+	public Sprite(String fileName) {
+		Sprite(Texture.load(fileName);
+	}
 
 	public int getWidth() {
 		return width;

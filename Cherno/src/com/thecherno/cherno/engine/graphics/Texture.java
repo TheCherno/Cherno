@@ -8,7 +8,10 @@ import javax.imageio.ImageIO;
 public class Texture {
 
 	private int width, height;
-	private int[] pixels;
+	private int[] pixels, pixelsrgb;
+
+	public static final int FORMAT_RGB = 0x0;
+	public static final int FORMAT_RGBA = 0x1;
 
 	private Texture(int width, int height, int[] pixels) {
 		this.width = width;
@@ -39,8 +42,16 @@ public class Texture {
 		return height;
 	}
 
-	public int[] getPixels() {
-		return pixels;
+	public int[] getPixels(int format) {
+		if (format == FORMAT_RGBA) return pixels;
+		if (pixelsrgb != null) return pixelsrgb;
+		pixelsrgb = new int[width * height];
+		for (int i = 0; i < width * height; i++) {
+			int r = (pixels[i] & 0xff0000) >> 16;
+			int g = (pixels[i] & 0xff00) >> 8;
+			int b = (pixels[i] & 0xff);
+			pixelsrgb[i] = r << 16 | g << 8 | b;
+		}
+		return pixelsrgb;
 	}
-
 }

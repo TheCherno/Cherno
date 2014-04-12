@@ -10,7 +10,7 @@ public class Sprite implements Renderable {
 	public Sprite(Texture texture) {
 		width = texture.getWidth();
 		height = texture.getHeight();
-		pixels = texture.getPixels();
+		pixels = texture.getPixels(Texture.FORMAT_RGB);
 	}
 
 	public int getWidth() {

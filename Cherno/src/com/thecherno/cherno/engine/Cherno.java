@@ -7,6 +7,7 @@ import com.thecherno.cherno.engine.graphics.Texture;
 import com.thecherno.cherno.engine.graphics.Window;
 import com.thecherno.cherno.engine.input.Keyboard;
 import com.thecherno.cherno.engine.input.Mouse;
+import com.thecherno.cherno.engine.interfaces.Renderable;
 
 /**
  * {@code Cherno} engine template class. This class should be the superclass of your main game class. All of the methods
@@ -76,14 +77,14 @@ public abstract class Cherno implements Runnable {
 	protected final void createDisplay(String name, int width, int height) {
 		startTimer = System.currentTimeMillis();
 		display = new Display(new Window(name, width, height));
-		screen = new Screen(width, height);
+		screen = new Screen(width, height, 1.0);
 	}
 
 	protected final void createDisplay(String name, int width, int height, double scale) {
 		startTimer = System.currentTimeMillis();
 		display = new Display(new Window(name, width, height));
 		display.setScale(scale);
-		screen = new Screen((int) (width / scale), (int) (height / scale));
+		screen = new Screen(width, height, scale);
 	}
 
 	/**
@@ -170,6 +171,10 @@ public abstract class Cherno implements Runnable {
 	 */
 	protected final void clear(Color col) {
 		screen.clear(col);
+	}
+
+	protected final void render(int x, int y, Renderable renderable) {
+		renderable.render(x, y, screen);
 	}
 
 	/**

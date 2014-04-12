@@ -9,15 +9,17 @@ import com.thecherno.cherno.engine.interfaces.Renderable;
 public class Screen {
 
 	private int width, height;
+	private double scale = 1.0;
 	private int[] pixels, imagePixels;
 
 	private BufferedImage image;
 
-	public Screen(int width, int height) {
-		this.width = width;
-		this.height = height;
-		pixels = new int[width * height];
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	public Screen(int width, int height, double scale) {
+		this.width = (int) (width / scale);
+		this.height = (int) (height / scale);
+		this.scale = scale;
+		pixels = new int[this.width * this.height];
+		image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
 		imagePixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	}
 
@@ -72,7 +74,7 @@ public class Screen {
 			for (int xx = 0; xx < texture.getWidth(); xx++) {
 				int xp = xx + x;
 				if (xp < 0 || xp >= this.width || yp < 0 || yp >= this.height) continue;
-				pixels[xp + yp * this.width] = texture.getPixels()[xx + yy * texture.getWidth()];
+				pixels[xp + yp * this.width] = texture.getPixels(Texture.FORMAT_RGB)[xx + yy * texture.getWidth()];
 			}
 		}
 	}
@@ -95,5 +97,9 @@ public class Screen {
 				pixels[xp + yp * width] = renderable.getPixels()[xx + yy * renderable.getWidth()];
 			}
 		}
+	}
+
+	public double getScale() {
+		return scale;
 	}
 }

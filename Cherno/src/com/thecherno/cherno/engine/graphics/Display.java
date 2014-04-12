@@ -50,8 +50,8 @@ public class Display {
 			window.addKeyListener(new Keyboard());
 		}
 		if ((device >> 1 & 0x1) == 1) {
-			window.addMouseListener(new Mouse());
-			window.addMouseMotionListener(new Mouse());
+			window.addMouseListener(new Mouse(scale));
+			window.addMouseMotionListener(new Mouse(scale));
 		}
 	}
 }

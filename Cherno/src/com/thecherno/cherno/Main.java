@@ -21,7 +21,7 @@ public class Main extends Cherno {
 
 	protected void init() {
 		sprite = new Sprite(Texture.load("res/sprite.png"));
-		createDisplay("Cherno 0.1a", 960, 540, 3.0);
+		createDisplay("Cherno 0.1a", 960, 540, 2.0);
 		setInput(KEYBOARD | MOUSE);
 		start();
 	}
@@ -37,8 +37,7 @@ public class Main extends Cherno {
 
 	protected void render() {
 		clear(Color.WHITE);
-		fillRect(mx, my, 80, 80, Color.ORANGE);
-		sprite.render(x, y, getScreen());
+		sprite.render(mx, my, getScreen());
 		show();
 	}
 

@@ -3,23 +3,25 @@ package com.thecherno.cherno.engine.graphics;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import com.thecherno.cherno.engine.input.Keyboard;
 import com.thecherno.cherno.engine.input.Mouse;
+import com.thecherno.cherno.engine.interfaces.RenderBuffer;
 
 public class Display {
 
 	private double scale = 1.0;
 
 	private Window window;
-	private Graphics g;
+	private Graphics graphics;
 	private BufferStrategy bs;
 
 	public Display(Window window) {
 		this.window = window;
 		createBufferStrategy();
 		bs = window.getBufferStrategy();
-		g = bs.getDrawGraphics();
+		graphics = bs.getDrawGraphics();
 	}
 
 	public void setScale(double scale) {
@@ -36,13 +38,20 @@ public class Display {
 	}
 
 	public void drawImage(BufferedImage image) {
-		g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, (int) (window.getWidth() * scale), (int) (window.getHeight() * scale), null);
+		graphics = bs.getDrawGraphics();
+		graphics.drawImage(image, 0, 0, (int) (window.getWidth() * scale), (int) (window.getHeight() * scale), null);
 	}
 
 	public void show() {
-		g.dispose();
+		graphics.dispose();
 		bs.show();
+	}
+
+	public Graphics getGraphics() {
+		if (graphics == null) {
+			// TODO: Handle
+		}
+		return graphics;
 	}
 
 	public void enable(byte device) {
@@ -53,5 +62,12 @@ public class Display {
 			window.addMouseListener(new Mouse(scale));
 			window.addMouseMotionListener(new Mouse(scale));
 		}
+	}
+
+	public void drawBufferedObjects(List<RenderBuffer> bufferedObjects) {
+		for (int i = 0; i < bufferedObjects.size(); i++) {
+			bufferedObjects.get(i).render(graphics);
+		}
+		bufferedObjects.clear();
 	}
 }

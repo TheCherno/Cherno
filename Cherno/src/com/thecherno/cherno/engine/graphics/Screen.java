@@ -1,9 +1,14 @@
 package com.thecherno.cherno.engine.graphics;
 
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.thecherno.cherno.engine.error.ChernoError;
+import com.thecherno.cherno.engine.interfaces.RenderBuffer;
 import com.thecherno.cherno.engine.interfaces.Renderable;
 
 public class Screen {
@@ -13,6 +18,8 @@ public class Screen {
 	private int[] pixels, imagePixels;
 
 	private BufferedImage image;
+	private List<RenderBuffer> buffer = new LinkedList<RenderBuffer>();
+	private Font font = new Font("Helvetica", 0, 20);
 
 	public Screen(int width, int height, double scale) {
 		this.width = (int) (width / scale);
@@ -64,6 +71,21 @@ public class Screen {
 		}
 	}
 
+	public void drawString(final String text, final int x, final int y, final Color color) {
+		drawString(text, x, y, font, color);
+	}
+
+	public void drawString(final String text, final int x, final int y, final Font font, final Color color) {
+		buffer.add(new RenderBuffer() {
+			public void render(Graphics graphics) {
+				int[] rgb = color.getRGB();
+				graphics.setFont(font);
+				graphics.setColor(new java.awt.Color(rgb[0], rgb[1], rgb[2]));
+				graphics.drawString(text, x, y);
+			}
+		});
+	}
+
 	public void renderTexture(Texture texture, int x, int y) {
 		if (texture == null) {
 			new ChernoError("Texture is null!", this).show();
@@ -99,7 +121,12 @@ public class Screen {
 		}
 	}
 
+	public List<RenderBuffer> getBufferedObjects() {
+		return buffer;
+	}
+
 	public double getScale() {
 		return scale;
 	}
+
 }

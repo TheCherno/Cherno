@@ -8,13 +8,17 @@ public class Sprite implements Renderable {
 	private int[] pixels;
 
 	public Sprite(Texture texture) {
+		create(texture);
+	}
+
+	public Sprite(String fileName) {
+		create(Texture.load(fileName));
+	}
+
+	private void create(Texture texture) {
 		width = texture.getWidth();
 		height = texture.getHeight();
 		pixels = texture.getPixels(Texture.FORMAT_RGB);
-	}
-	
-	public Sprite(String fileName) {
-		Sprite(Texture.load(fileName);
 	}
 
 	public int getWidth() {

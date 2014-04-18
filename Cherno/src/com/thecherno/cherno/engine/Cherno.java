@@ -149,6 +149,7 @@ public abstract class Cherno implements Runnable {
 	protected final void show() {
 		screen.copy();
 		display.drawImage(screen.getImage());
+		display.drawBufferedObjects(screen.getBufferedObjects());
 		display.show();
 	}
 

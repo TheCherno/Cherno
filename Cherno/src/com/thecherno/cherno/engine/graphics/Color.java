@@ -20,6 +20,10 @@ public class Color {
 		this.color = getHex(r, g, b);
 	}
 
+	public int[] getRGB() {
+		return getRGB(color);
+	}
+
 	public static int[] getRGB(int hex) {
 		int r = (hex & 0xff0000) >> 16;
 		int g = (hex & 0xff00) >> 8;

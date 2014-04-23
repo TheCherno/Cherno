@@ -73,5 +73,10 @@ public class TiledLevel extends Level {
 				screen.render(tx, ty, tile);
 			}
 		}
+		super.render(screen);
+	}
+
+	public int getTileSize() {
+		return tileSize;
 	}
 }

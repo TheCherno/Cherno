@@ -6,6 +6,7 @@ import com.thecherno.cherno.engine.Cherno;
 import com.thecherno.cherno.engine.GrassTile;
 import com.thecherno.cherno.engine.RockTile;
 import com.thecherno.cherno.engine.State;
+import com.thecherno.cherno.engine.audio.Sound;
 import com.thecherno.cherno.engine.graphics.Color;
 import com.thecherno.cherno.engine.graphics.Sprite;
 import com.thecherno.cherno.engine.graphics.Texture;
@@ -22,6 +23,7 @@ public class Main extends Cherno {
 	private int mx, my;
 
 	private TiledLevel test;
+	private Player player;
 
 	private Sprite grass, rock;
 	private Menu menu = new Menu(new MenuOption[] { new MenuOption("Play", new Action() {
@@ -35,21 +37,25 @@ public class Main extends Cherno {
 	}) });
 
 	private void levels() {
-		test = new TiledLevel("res/levels/level_BIG.png");
+		test = new TiledLevel("res/levels/level.png");
 		test.addTileCode(0xffffff, new GrassTile(grass.getWidth(), grass.getHeight(), grass));
 		test.setTileSize(32);
 		test.addTileCode(0xff00ff, new RockTile(rock));
+		test.add(player);
 	}
 
 	protected void init() {
 		grass = new Sprite(Texture.load("res/grass.png"));
 		rock = new Sprite(Texture.load("res/rock.png"));
+		player = new Player();
 		levels();
 		createDisplay("Cherno 0.1a", 960, 540, 2.0);
 		setInput(KEYBOARD | MOUSE);
 		start();
 		State.setState(State.MENU);
 	}
+
+	Sound sound = new Sound("res/Test.wav");
 
 	protected void update() {
 		mx = Mouse.getX();
@@ -61,8 +67,18 @@ public class Main extends Cherno {
 		if (State.getState() == State.GAME) {
 			if (Keyboard.keyTyped(KeyEvent.VK_ESCAPE)) State.setState(State.MENU);
 		}
+		if (Keyboard.keyTyped(KeyEvent.VK_S)) {
+			sound.loop();
+		}
+		if (Keyboard.keyTyped(KeyEvent.VK_Q)) {
+			sound.play();
+		}
+		if (Keyboard.keyTyped(KeyEvent.VK_A)) {
+			sound.stop();
+		}
 		menu.update();
-		test.setOffset(x, y);
+		test.setOffset(player.getX() - 960 / 8, player.getY() - 540 / 8);
+		test.update();
 	}
 
 	protected void render() {

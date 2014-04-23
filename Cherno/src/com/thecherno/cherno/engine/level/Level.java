@@ -16,15 +16,15 @@ import com.thecherno.cherno.engine.interfaces.Updatable;
  */
 public abstract class Level implements Renderable, Updatable {
 
-	/** The width/height of the {@code Level} */
+	/** The width/height of the {@code Level}. */
 	protected int width, height;
 	protected int xOffset, yOffset;
 
-	/** The {@code List} containing the {@code Entity}s in the {@code Level} */
+	/** The {@code List} containing the {@code Entity}s in the {@code Level}. */
 	protected List<Entity> entities = new ArrayList<Entity>();
 
 	/**
-	 * Creates an empty {@code Level}
+	 * Creates an empty {@code Level}.
 	 * 
 	 * @param width
 	 *            The width of the {@code Level}
@@ -94,10 +94,23 @@ public abstract class Level implements Renderable, Updatable {
 		this.yOffset = yOffset;
 	}
 
+	public void render(Screen screen) {
+		renderEntities(screen);
+	}
+
 	public void update() {
+		updateEntities();
+	}
+
+	private void updateEntities() {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
 		}
 	}
 
+	private void renderEntities(Screen screen) {
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).render(0, 0, screen);
+		}
+	}
 }

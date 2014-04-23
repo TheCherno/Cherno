@@ -8,7 +8,7 @@ public abstract class Entity implements Renderable, Updatable {
 
 	protected int x, y;
 	private boolean removed = false;
-	private Level level;
+	protected Level level;
 
 	public boolean isRemoved() {
 		return removed;

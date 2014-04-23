@@ -12,6 +12,10 @@ public class RockTile extends Tile {
 		height = 32;
 	}
 
+	public boolean solid() {
+		return true;
+	}
+
 	public void render(int x, int y, Screen screen) {
 		screen.render(x, y, this);
 	}

@@ -23,4 +23,8 @@ public abstract class Tile implements Renderable {
 	public int[] getPixels() {
 		return sprite.getPixels();
 	}
+
+	public boolean solid() {
+		return false;
+	}
 }
